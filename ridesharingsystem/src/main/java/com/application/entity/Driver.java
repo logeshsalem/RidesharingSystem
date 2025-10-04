@@ -1,8 +1,8 @@
 package com.application.entity;
 
 import java.time.LocalDateTime;
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -21,12 +21,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="users")
+@Table(name="drivers")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users {
+public class Driver {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,8 +44,11 @@ public class Users {
 	@Column(name="password")
 	private String password;
 	
-//	@Column(name="role")
-//	private String role;
+	@Column(name="license_number")
+	private String licenseNumber;
+	
+	@Column(name="vehicle_details")
+	private String vehicleDetails;
 	
 	@Column(name="registration_date")
 	private LocalDateTime registrationDate;
@@ -55,10 +58,10 @@ public class Users {
         this.registrationDate = LocalDateTime.now();
     }
 	
-//	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = {CascadeType.REFRESH, CascadeType.DETACH,
-//			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-//	@JsonManagedReference
-//	private Set<Ride> rides;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "driver", cascade = {CascadeType.REFRESH, CascadeType.DETACH,
+			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+	@JsonManagedReference
+	private List<Ride> rides = new ArrayList<>();
 	
 	
 	

@@ -24,7 +24,7 @@ public class RideDTO {
     private String comment;
     private LocalDateTime createdAt;
     private LocalDateTime updateAt;
-    private int userId;  // Only store userId instead of entire Users object
+    private int driverId;  // Only store userId instead of entire Users object
     
     @PrePersist
     protected void onCreateAt() {
@@ -45,7 +45,7 @@ public class RideDTO {
         this.comment = ride.getComment();
         this.createdAt = ride.getCreatedAt();
         this.updateAt = ride.getUpdateAt();
-        this.userId = ride.getUser().getId();  
+        this.driverId = ride.getDriver().getId();  
     }
 
    

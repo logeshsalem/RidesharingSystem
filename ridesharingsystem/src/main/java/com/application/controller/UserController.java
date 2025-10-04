@@ -34,11 +34,7 @@ public class UserController {
 		Optional<Users> existingUser = userRepository.findByEmail(users.getEmail());		
 		if(existingUser.isPresent()) {
 			return ResponseEntity.badRequest().body("email already exist");
-		}else {
-			users.setRole("driver");
-			 for (Ride ride : users.getRides()) {
-		            ride.setUser(users);
-		        }				
+		}else {						
 			userService.saveUsers(users);
 			return ResponseEntity.ok("User "+users.getUsername()+" added Successfully");
 		}			
@@ -51,7 +47,6 @@ public class UserController {
 		if(existingUser.isPresent()) {
 			return ResponseEntity.badRequest().body("email already exist");
 		}else {
-			users.setRole("passenger");
 			userService.saveUsers(users);
 			return ResponseEntity.ok("User "+users.getUsername()+" added Successfully");
 		}			
@@ -76,7 +71,7 @@ public class UserController {
 		users.setId(userId);
 		users.setRegistrationDate(LocalDateTime.now());
 		users.setEmail(users.getEmail());	
-		users.setRole("passenger");
+//		users.setRole("passenger");
 		Users theUsers = userService.saveUsers(users);
 		return ResponseEntity.ok("User updated successfully");
 	}

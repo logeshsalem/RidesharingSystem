@@ -69,19 +69,19 @@ public class Ride {
         this.updateAt = LocalDateTime.now();
     }	
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.DETACH,
-			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-	@JoinColumn(name="user_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.DETACH,
+			CascadeType.MERGE, CascadeType.PERSIST})
+	@JoinColumn(name="driver_id", nullable = false)
 //	@JsonIgnore
 	@JsonBackReference
-	private Users user;
+	private Driver driver;
 
 	@Override
 	public String toString() {
 		return "Ride [id=" + id + ", origin=" + origin + ", destination=" + destination + ", rideDate=" + rideDate
 				+ ", rideTime=" + rideTime + ", availableSeats=" + availableSeats + ", totalSeats=" + totalSeats
 				+ ", pricePerSeat=" + pricePerSeat + ", rideStatus=" + rideStatus + ", comment=" + comment
-				+ ", createdAt=" + createdAt + ", updateAt=" + updateAt + ", user=" + (user != null ? user.getId() : "null") + "]";
+				+ ", createdAt=" + createdAt + ", updateAt=" + updateAt;
 	}
 
 	
